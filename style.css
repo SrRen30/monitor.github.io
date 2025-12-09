@@ -1,0 +1,41 @@
+:root{
+  --bg:#2C3E50; --card:#34495E; --accent:#2ECC71; --text:#ECF0F1;
+}
+*{box-sizing:border-box;font-family:Inter,Arial,Helvetica,sans-serif}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,#1c2833 0%, #2c3e50 100%);color:var(--text)}
+.container{max-width:1100px;margin:24px auto;padding:18px}
+header{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+h1{margin:0;font-size:24px}
+.subtitle{color:#bfcad4;margin:0;font-size:13px}
+.card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.35);margin-top:14px}
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{padding:8px 12px;border-radius:8px;border:none;background:#7f8c8d;color:white;cursor:pointer}
+.btn.primary{background:var(--accent)}
+.btn.danger{background:#e74c3c}
+.mt{margin-top:12px}
+.compact input[type="number"]{width:90px}
+.pill{padding:6px 10px;border-radius:999px;background:#1d2a33}
+.muted{opacity:.8;font-size:12px}
+.hidden{display:none}
+
+/* Visual */
+.diagram{display:flex;gap:12px;justify-content:space-between;padding:12px;background:#22313a;border-radius:8px}
+.section{width:22%;padding:12px;border-radius:8px;background:#1f2b33;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .3s}
+.section .label{position:absolute;top:6px;left:8px;font-size:13px;color:#dfeff2}
+.section .temp{font-size:18px;font-weight:700}
+.section::after{
+  content:"";position:absolute;inset:0;border-radius:8px;opacity:.06;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 40%);
+  transition:opacity .3s, transform .3s;
+}
+
+/* Tabla */
+table{width:100%;border-collapse:collapse;color:var(--text);font-size:13px}
+th,td{padding:8px;border-bottom:1px solid rgba(236,240,241,0.04);text-align:center}
+footer{margin-top:12px;color:#aab6bd}
+
+/* Responsive */
+@media(max-width:700px){
+  .diagram{flex-direction:column}
+  .section{width:100%}
+}

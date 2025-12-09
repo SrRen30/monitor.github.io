@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Monitor térmico</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Monitor térmico</h1>
+      <p class="subtitle">4 secciones · gráfico en vivo · guarda en MySQL (PHP)</p>
+    </header>
+
+    <!-- Controles -->
+    <section class="card compact">
+      <div class="row">
+        <span class="pill">Fuente de datos:</span>
+        <label><input type="radio" name="mode" id="mode-sim" value="sim" checked> Simulados</label>
+        <label><input type="radio" name="mode" id="mode-serial" value="serial"> Serial (WebSerial)</label>
+        <button id="connect-serial" class="btn hidden">Conectar Serial</button>
+      </div>
+
+      <!-- Simulación -->
+      <div id="sim-controls" class="row mt">
+        <span class="pill">Simulación</span>
+        <label>Objetivo global (°C)</label><input type="number" id="target" value="55" step="0.5">
+        <label>Velocidad (°C/s)</label><input type="number" id="rate" value="2" step="0.1" min="0.1">
+        <label>Ruido (±°C)</label><input type="number" id="noise" value="0.2" step="0.1" min="0">
+        <button id="apply" class="btn">Aplicar</button>
+      </div>
+
+      <!-- Serial -->
+      <div id="serial-controls" class="row mt hidden">
+        <span class="pill">Serial</span>
+        <label for="baud">Baudrate</label>
+        <select id="baud">
+          <option>9600</option>
+          <option>115200</option>
+        </select>
+        <span class="muted">Conecta y luego “Iniciar”.</span>
+      </div>
+
+      <div class="row mt">
+        <button id="start" class="btn primary">Iniciar</button>
+        <button id="stop" class="btn danger" disabled>Detener</button>
+
+        <label class="pill">Auto-guardar</label>
+        <input type="checkbox" id="auto-save" checked>
+        <button id="export" class="btn">Exportar CSV</button>
+        <span class="muted">Consejo: con “Simulados” no necesitas hardware.</span>
+      </div>
+    </section>
+
+    <!-- Tarjetas + gráfica -->
+    <section class="card">
+      <div class="diagram">
+        <div class="section" id="s1"><div class="label">Sección 1</div><div class="temp">0.0°C</div></div>
+        <div class="section" id="s2"><div class="label">Sección 2</div><div class="temp">0.0°C</div></div>
+        <div class="section" id="s3"><div class="label">Sección 3</div><div class="temp">0.0°C</div></div>
+        <div class="section" id="s4"><div class="label">Sección 4</div><div class="temp">0.0°C</div></div>
+      </div>
+      <canvas id="chart" height="200"></canvas>
+    </section>
+
+    <!-- Tabla -->
+    <section class="card">
+      <h3>Lecturas recientes</h3>
+      <table id="table">
+        <thead><tr><th>Hora</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <footer>
+      <small>Web Serial funciona en Chrome/Edge sobre HTTPS o <strong>localhost</strong>.</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
